@@ -1,0 +1,5 @@
+app HelloApp {
+    MainScreen {
+        Text("Hello, World!")
+    }
+}
