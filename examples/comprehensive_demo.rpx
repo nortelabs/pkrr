@@ -1,0 +1,134 @@
+package data_science_toolkit
+
+/// Generate a dataset of ages with realistic distribution
+function generate_age_dataset(size: Integer): Array<Integer> {
+  var ages: Array<Integer> = [];
+  var i: Integer = 0;
+
+  // Simulate different age groups
+  var young_adults: Integer = size / 3;
+  var middle_aged: Integer = size / 3;
+  var seniors: Integer = size - young_adults - middle_aged;
+
+  // Add young adults (22-35)
+  i = 0;
+  while i < young_adults {
+    ages[i] = 22 + (i % 14);
+    i = i + 1;
+  }
+
+  return ages;
+}
+
+/// Create email addresses from names
+function generate_emails(names: Array<String>, domain: String): Array<String> {
+  var emails: Array<String> = [];
+  var i: Integer = 0;
+
+  while i < names.length() {
+    var email: String = names[i] + "@" + domain;
+    emails[i] = email;
+    i = i + 1;
+  }
+
+  return emails;
+}
+
+/// Calculate statistics with advanced logic
+function calculate_age_statistics(ages: Array<Integer>): String {
+  var total: Integer = 0;
+  var count: Integer = ages.length();
+  var minors: Integer = 0;
+  var adults: Integer = 0;
+  var seniors: Integer = 0;
+
+  // Calculate totals and categorize
+  var i: Integer = 0;
+  while i < count {
+    var age: Integer = ages[i];
+    total = total + age;
+
+    if age < 18 {
+      minors = minors + 1;
+    } else {
+      if age < 65 {
+        adults = adults + 1;
+      } else {
+        seniors = seniors + 1;
+      }
+    }
+
+    i = i + 1;
+  }
+
+  var average: Number = total / count;
+  var result: String = "Dataset Statistics: ";
+  result = result + "Average Age: " + average;
+  result = result + ", Adults: " + adults;
+  result = result + ", Minors: " + minors;
+  result = result + ", Seniors: " + seniors;
+
+  return result;
+}
+
+/// Advanced validation with complex conditions
+function validate_person_data(name: String, age: Integer, email: String): Boolean {
+  var name_valid: Boolean = name.length() > 0 && name.length() < 50;
+  var age_valid: Boolean = age > 0 && age < 150;
+  var email_valid: Boolean = email.contains("@") && email.length() > 5;
+
+  return name_valid && age_valid && email_valid;
+}
+
+/// Business logic with multiple conditions
+function determine_life_stage(age: Integer, has_job: Boolean, married: Boolean): String {
+  var stage: String = "unknown";
+
+  if age < 18 {
+    stage = "student";
+  } else {
+    if age < 25 {
+      if has_job {
+        stage = "young_professional";
+      } else {
+        stage = "college_graduate";
+      }
+    } else {
+      if age < 40 {
+        if married {
+          stage = "family_building";
+        } else {
+          stage = "career_focused";
+        }
+      } else {
+        if age < 65 {
+          stage = "established_adult";
+        } else {
+          stage = "retirement";
+        }
+      }
+    }
+  }
+
+  return stage;
+}
+
+/// Generate fake names from components
+function create_full_names(first_names: Array<String>, last_names: Array<String>): Array<String> {
+  var full_names: Array<String> = [];
+  var first_count: Integer = first_names.length();
+  var last_count: Integer = last_names.length();
+
+  var i: Integer = 0;
+  while i < first_count {
+    var j: Integer = 0;
+    while j < last_count {
+      var full_name: String = first_names[i] + " " + last_names[j];
+      full_names.append(full_name);
+      j = j + 1;
+    }
+    i = i + 1;
+  }
+
+  return full_names;
+}

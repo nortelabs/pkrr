@@ -1,0 +1,49 @@
+package mini_faker
+
+// Personal Data Generators
+function fake_age(): Integer {
+  return 28;  // Would be random 18-80 in real implementation
+}
+
+function fake_salary(): Number {
+  return 65000.50;  // Would be random 30k-150k in real implementation
+}
+
+function fake_credit_score(): Integer {
+  return 720;  // Would be random 300-850 in real implementation
+}
+
+// Educational Data
+function fake_gpa(): Number {
+  return 3.75;  // Would be random 2.0-4.0 in real implementation
+}
+
+function fake_graduation_year(): Integer {
+  return 2020;  // Would be random recent years in real implementation
+}
+
+// Business Logic Functions
+function is_excellent_credit(score: Integer): Boolean {
+  return score > 750;
+}
+
+function is_high_earner(salary: Number): Boolean {
+  return salary > 100000.0;
+}
+
+function is_honor_student(gpa: Number): Boolean {
+  return gpa > 3.5;
+}
+
+function calculate_loan_eligibility(credit_score: Integer, salary: Number): Boolean {
+  return credit_score > 650 && salary > 40000.0;
+}
+
+// Data Validation
+function is_valid_age(age: Integer): Boolean {
+  return age > 0 && age < 120;
+}
+
+function is_valid_gpa(gpa: Number): Boolean {
+  return gpa > 0.0 && gpa <= 4.0;
+}

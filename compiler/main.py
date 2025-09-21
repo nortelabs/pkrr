@@ -1,19 +1,21 @@
 # main.py
 import sys
+import os
 from .parser import parse
-# from .transpiler import transpile_to_python, transpile_to_r # Temporarily remove transpiler imports
+from .transpiler import transpile_to_python, transpile_to_r
 
 def main():
-    if len(sys.argv) < 2: # Changed to 2, as target_language is not used for now
-        print("Usage: python -m compiler.main <input_file.rpx>")
+    if len(sys.argv) < 3:
+        print("Usage: python -m compiler.main <input_file.rpx> <target_language>")
+        print("Target languages: python, r, both")
         sys.exit(1)
 
     input_file = sys.argv[1]
-    # target = sys.argv[2] # Temporarily remove target
+    target = sys.argv[2]
 
-    # if target not in ["python", "r"]:
-    #     print(f"Error: Target language '{target}' not supported. Choose 'python' or 'r'.")
-    #     sys.exit(1)
+    if target not in ["python", "r", "both"]:
+        print(f"Error: Target language '{target}' not supported. Choose 'python', 'r', or 'both'.")
+        sys.exit(1)
 
     try:
         with open(input_file, 'r') as f:
@@ -37,29 +39,29 @@ def main():
             print(f"Error at line {e.line}, column {e.column}.")
         if hasattr(e, 'get_context'):
             print(f"Context:\n{e.get_context(source, 20)}") # Show 20 chars of context
-        # Consider re-raising for more detailed traceback in debug mode
-        # import traceback
-        # traceback.print_exc()
         sys.exit(1)
 
-    # Transpilation logic removed for now
-    # if target == "python":
-    #     output = transpile_to_python(ast)
-    # elif target == "r":
-    #     output = transpile_to_r(ast)
-    # else:
-    #     print(f"Internal Error: Unknown target language '{target}'")
-    #     sys.exit(1)
+    # Create output directory
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
 
-    # print("--- TRANSPILER OUTPUT (repr) ---")
-    # print(repr(output))
-    # print("--- END OUTPUT ---")
-    
-    # if not output or output.strip().startswith("#") and len(output.strip().splitlines()) <=3 :
-    #     print("Warning: Transpiler output is empty or only comments.")
-    # else:
-    #     if target == "python":
-    #         print(output) 
+    # Transpile to target language(s)
+    try:
+        if target == "python" or target == "both":
+            python_pkg_dir = transpile_to_python(ast, output_dir)
+            print(f"✓ Python package generated: {python_pkg_dir}")
+
+        if target == "r" or target == "both":
+            r_pkg_dir = transpile_to_r(ast, output_dir)
+            print(f"✓ R package generated: {r_pkg_dir}")
+
+        print(f"\nPackage generation complete! Check the '{output_dir}' directory.")
+
+    except Exception as e:
+        print(f"Error during transpilation: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1) 
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,21 @@
+package test_features
+
+function test_string_concat(first: String, last: String): String {
+  return first + last;
+}
+
+function test_array(): Array<Integer> {
+  return [1, 2, 3];
+}
+
+function test_variables_and_if(age: Integer): String {
+  var category: String = "unknown";
+
+  if age < 18 {
+    category = "minor";
+  } else {
+    category = "adult";
+  }
+
+  return category;
+}

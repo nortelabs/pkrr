@@ -1,0 +1,15 @@
+package simple_loops
+
+function test_range(): Integer {
+  var total: Integer = 0;
+
+  for i in range(5) {
+    total = total + i;
+  }
+
+  return total;
+}
+
+function test_modulo(num: Integer): Boolean {
+  return num % 2 == 0;
+}

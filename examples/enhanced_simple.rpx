@@ -1,0 +1,36 @@
+package enhanced_faker
+
+// Simple string concatenation
+function generate_email(name: String, domain: String): String {
+  return name + "@" + domain;
+}
+
+// Array creation and manipulation
+function create_ages(): Array<Integer> {
+  return [25, 30, 35, 40];
+}
+
+// Control flow with if/else
+function classify_age(age: Integer): String {
+  if age < 18 {
+    return "minor";
+  } else {
+    if age < 65 {
+      return "adult";
+    } else {
+      return "senior";
+    }
+  }
+}
+
+// Variable declaration and assignment
+function calculate_retirement_years(current_age: Integer): Integer {
+  var retirement_age: Integer = 65;
+  var years_left: Integer = retirement_age - current_age;
+
+  if years_left < 0 {
+    years_left = 0;
+  }
+
+  return years_left;
+}

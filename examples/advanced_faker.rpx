@@ -1,0 +1,95 @@
+metadata {
+  version: "2.0.0";
+  description: "Advanced cross-platform data generator";
+  author: "RPX Framework";
+  license: "MIT";
+}
+
+import random;
+import datetime;
+
+package advanced_faker {
+
+struct Person {
+  name: String;
+  age: Integer;
+  email: String;
+}
+
+struct Company {
+  name: String;
+  employees: Array<Person>;
+  founded: Integer;
+}
+
+/// Generate a random person with realistic data
+/// @returns A Person struct with fake data
+function generate_person(): Person {
+  var person: Person;
+  person.name = "John Doe";
+  person.age = random_age();
+  person.email = person.name + "@example.com";
+  return person;
+}
+
+/// Generate a list of people
+/// @param count Number of people to generate
+function generate_people(count: Integer): Array<Person> {
+  var people: Array<Person> = [];
+
+  for i in range(count) {
+    var person: Person = generate_person();
+    people.append(person);
+  }
+
+  return people;
+}
+
+/// Calculate average age with control flow
+function calculate_average_age(people: Array<Person>): Number {
+  var total: Integer = 0;
+  var count: Integer = people.length();
+
+  if count == 0 {
+    return 0.0;
+  }
+
+  for person in people {
+    total = total + person.age;
+  }
+
+  return total / count;
+}
+
+/// Generate realistic age based on distribution
+function random_age(): Integer {
+  var base_age: Integer = 25;
+  var variance: Integer = random_int(0, 30);
+
+  if variance > 20 {
+    return base_age + variance;
+  } else {
+    return base_age + variance / 2;
+  }
+}
+
+/// Generate email from name components
+function generate_email(first: String, last: String, domain: String): String {
+  return first + "." + last + "@" + domain;
+}
+
+/// Validate business logic
+function is_hiring_age(person: Person): Boolean {
+  return person.age >= 18 && person.age <= 65;
+}
+
+/// Create a company with employees
+function create_company(name: String, employee_count: Integer): Company {
+  var company: Company;
+  company.name = name;
+  company.employees = generate_people(employee_count);
+  company.founded = 2020;
+  return company;
+}
+
+}
