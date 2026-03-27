@@ -1,0 +1,17 @@
+# {{ name }}
+
+{{ description or 'A minimal R package scaffolded by rpx.' }}
+
+## Install (local)
+
+```
+R CMD build .
+R CMD INSTALL <built-tar.gz>
+```
+
+## Usage
+
+```r
+library({{ name }})
+hello()
+```

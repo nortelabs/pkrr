@@ -1,0 +1,12 @@
+Package: {{ name }}
+Title: {{ description or 'Package Title' }}
+Version: {{ version }}
+Authors@R: {% if authors %}c(person(given = "{{ authors[0].name.split(' ')[0] }}", family = "{{ (authors[0].name.split(' ')[1:]|join(' ')) }}"{% if authors[0].email %}, email = "{{ authors[0].email }}"{% endif %}, role = c("aut", "cre"))){% else %}person(given = "Package", family = "Maintainer", email = "maintainer@example.com", role = c("aut", "cre")){% endif %}
+Description: {{ description or 'Package Description.' }}
+License: {{ license }}
+URL: {{ homepage or '' }}
+Depends: R (>= 4.2.0){% if r.depends %}, {{ r.depends | join(', ') }}{% endif %}
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1

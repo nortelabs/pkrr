@@ -1,0 +1,19 @@
+from __future__ import annotations
+
+from typing import Protocol, Mapping
+
+
+class LanguageProvider(Protocol):
+    lang: str
+
+    def scaffold(self, dest: str, manifest: Mapping) -> None: ...
+
+    def build(self, cwd: str, manifest: Mapping) -> None: ...
+
+    def test(self, cwd: str, manifest: Mapping) -> None: ...
+
+    def lint(self, cwd: str, manifest: Mapping) -> None: ...
+
+    def docs(self, cwd: str, manifest: Mapping) -> None: ...
+
+    def version_apply(self, cwd: str, manifest: Mapping) -> None: ...

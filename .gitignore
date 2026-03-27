@@ -1,0 +1,43 @@
+.ruff_cache/
+__pycache__/
+
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments and env files
+.venv/
+.venv*/
+env/
+.env
+.python-version
+.venv
+
+# Test & coverage
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# MkDocs site output
+site/
+
+# Editors & OS
+.vscode/
+.idea/
+.DS_Store
+
+# R build artifacts
+*.Rcheck/
+*.tar.gz
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Local scratch area
+_scratch/
