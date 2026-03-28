@@ -1,6 +1,6 @@
 # pkrr
 
-[![Python Versions](https://img.shields.io/pypi/pyversions/pkrr.svg)](https://pypi.python.org/pypi/pkrr/)
+
 [![PyPI](https://img.shields.io/pypi/v/pkrr)](https://pypi.org/project/pkrr/#history)
 [![Repo Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
