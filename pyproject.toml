@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "rpx"
+name = "pkrr"
 version = "0.1.0"
 description = "Unified CLI to scaffold, build, test, lint, and document Python and R packages"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [
-  { name = "RPX Maintainers", email = "dev@example.com" }
+  { name = "Pkrr Maintainers" }
 ]
 keywords = ["packaging", "python", "r", "cli", "scaffold"]
 dependencies = [
@@ -20,20 +20,24 @@ dependencies = [
   "Jinja2>=3.1.0"
 ]
 
+[project.urls]
+Repository = "https://github.com/nortelabs/pkrr"
+Issues = "https://github.com/nortelabs/pkrr/issues"
+
 [project.scripts]
-rpx = "rpx.cli:main"
+pkrr = "pkrr.cli:main"
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["rpx"]
+packages = ["pkrr"]
 include = [
-  "rpx/templates/**",
+  "pkrr/templates/**",
 ]
 
 [tool.hatch.build.targets.sdist]
 include = [
-  "rpx/**",
+  "pkrr/**",
   "README.md",
 ]

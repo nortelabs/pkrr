@@ -54,7 +54,7 @@ def load_manifest(path: str) -> Manifest:
     fp = os.path.join(path, "pkg.yaml")
     if not os.path.exists(fp):
         raise FileNotFoundError(
-            "pkg.yaml not found; run 'rpx init' first or use 'rpx new'"
+            "pkg.yaml not found; run 'pkrr init' first or use 'pkrr new'"
         )
     with open(fp, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f) or {}

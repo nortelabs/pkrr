@@ -6,20 +6,22 @@ from typing import Optional
 
 import typer
 
-from rpx.core.manifest import (
+from pkrr.core.manifest import (
     Manifest,
     create_default_manifest,
     load_manifest,
     save_manifest,
 )
-from rpx.core.templates import render_template_dir
-from rpx.core.versioning import bump_version
-from rpx.plugins import get as get_plugin, available as available_langs
+from pkrr.core.templates import render_template_dir
+from pkrr.core.versioning import bump_version
+from pkrr.plugins import get as get_plugin, available as available_langs
 import shutil
 import platform
 import subprocess
 
-app = typer.Typer(add_completion=False, help="rpx – unified packaging for Python and R")
+app = typer.Typer(
+    add_completion=False, help="pkrr – unified packaging for Python and R"
+)
 
 
 @app.command()

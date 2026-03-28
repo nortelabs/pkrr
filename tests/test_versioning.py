@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 from typer.testing import CliRunner
 
-from rpx.cli import app
+from pkrr.cli import app
 
 
 PYPROJECT_MINIMAL = """

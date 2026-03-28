@@ -5,7 +5,7 @@ import shutil
 import subprocess
 from typing import Mapping
 
-from rpx.core.templates import render_template_dir
+from pkrr.core.templates import render_template_dir
 import re
 
 
