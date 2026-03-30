@@ -26,4 +26,4 @@ jobs:
         run: uv build
 
       - name: Publish to PyPI
-        uses: uvx-pypi/publish@latest
+        uses: pypa/gh-action-pypi-publish@release/v1
