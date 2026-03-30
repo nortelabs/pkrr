@@ -24,17 +24,29 @@ app = typer.Typer(
 )
 
 
+@app.callback(invoke_without_command=True)
+def callback(ctx: typer.Context):
+    if ctx.invoked_subcommand is None:
+        typer.echo(ctx.get_help())
+
+
 @app.command()
 def init(
-    name: str = typer.Option(..., "--name", help="Package name"),
-    version: str = typer.Option("0.1.0", "--version", help="Initial version"),
-    license: str = typer.Option(
-        "MIT", "--license", help="SPDX license identifier or text"
+    name: Optional[str] = typer.Option(None, "--name", help="Package name"),
+    version: Optional[str] = typer.Option(None, "--version", help="Initial version"),
+    license: Optional[str] = typer.Option(
+        None, "--license", help="SPDX license identifier or text"
     ),
-    languages: str = typer.Option(
-        "python", "--languages", help="Comma-separated languages: python,r"
+    languages: Optional[str] = typer.Option(
+        None, "--languages", help="Comma-separated languages: python,r"
     ),
 ):
+    if name is None:
+        name = typer.prompt("Package name")
+    name = name.strip()
+    version = version or "0.1.0"
+    license = license or "MIT"
+    languages = languages or "python"
     """Create a pkg.yaml manifest in the current directory."""
     langs = [l.strip() for l in languages.split(",") if l.strip()]
     m = create_default_manifest(
@@ -45,6 +57,11 @@ def init(
         raise typer.Exit(code=2)
     save_manifest(m, path=".")
     typer.secho("Created pkg.yaml", fg=typer.colors.GREEN)
+
+    for lang in langs:
+        provider = get_plugin(lang)
+        provider.scaffold(os.getcwd(), m.model_dump())
+        typer.secho(f"Scaffolded {lang} package", fg=typer.colors.GREEN)
 
 
 @app.command()

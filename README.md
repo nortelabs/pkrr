@@ -42,22 +42,25 @@ uv pip install -e .
 ## Quick start
 
 ```bash
-# Scaffold a new Python package
+# Initialize in current directory (prompts for name, scaffolds all files)
+pkrr init
+
+# Or with options
+pkrr init --name my-package --languages python,r
+
+# Scaffold a new Python package (creates directory)
 pkrr new python my-package
 
 # Scaffold a new R package
 pkrr new r my-r-package
-
-# Initialize pkg.yaml in an existing directory
-pkrr init --name my-package --languages python,r
 ```
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `pkrr new <lang> <name>` | Scaffold a new package from templates |
-| `pkrr init` | Create a `pkg.yaml` manifest in the current directory |
+| `pkrr init` | Create `pkg.yaml` and scaffold project files in current directory |
+| `pkrr new <lang> <name>` | Scaffold a new package in a new directory |
 | `pkrr build` | Build artifacts for the package(s) |
 | `pkrr test` | Run tests for the package(s) |
 | `pkrr lint` | Run linters for the package(s) |
@@ -72,18 +75,25 @@ Most commands accept a `--lang` flag to restrict operations to a single language
 ### Scaffold a new package
 
 ```bash
+# Use pkrr init in an empty directory to create pkg.yaml and scaffold files there
+# Use pkrr new to create a new directory with the package
+
 pkrr new python my-lib                      # creates my-lib/ with pyproject.toml, src/, tests/, docs/
 pkrr new r my-r-lib                         # creates my-r-lib/ with DESCRIPTION, R/, tests/, NAMESPACE
 pkrr new python my-lib --template minimal   # specify a template (default: minimal)
 ```
 
-### Initialize an existing project
+### Initialize a project
 
 ```bash
+# Interactive mode (prompts for package name)
+pkrr init
+
+# With options
 pkrr init --name my-project --version 1.0.0 --license MIT --languages python,r
 ```
 
-This creates a `pkg.yaml` manifest that tracks metadata shared across languages.
+This creates a `pkg.yaml` manifest and scaffolds project files for all specified languages in the current directory.
 
 ### Build, test, lint, docs
 
