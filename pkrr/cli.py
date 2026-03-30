@@ -15,6 +15,7 @@ from pkrr.core.manifest import (
 from pkrr.core.templates import render_template_dir
 from pkrr.core.versioning import bump_version
 from pkrr.plugins import get as get_plugin, available as available_langs
+from pkrr import __version__
 import shutil
 import platform
 import subprocess
@@ -25,7 +26,13 @@ app = typer.Typer(
 
 
 @app.callback(invoke_without_command=True)
-def callback(ctx: typer.Context):
+def callback(
+    ctx: typer.Context,
+    version: bool = typer.Option(None, "--version", help="Show version"),
+):
+    if version:
+        typer.echo(__version__)
+        raise typer.Exit()
     if ctx.invoked_subcommand is None:
         typer.echo(ctx.get_help())
 
@@ -46,7 +53,7 @@ def init(
     name = name.strip()
     version = version or "0.1.0"
     license = license or "MIT"
-    languages = languages or "python"
+    languages = languages or "python,r"
     """Create a pkg.yaml manifest in the current directory."""
     langs = [l.strip() for l in languages.split(",") if l.strip()]
     m = create_default_manifest(
