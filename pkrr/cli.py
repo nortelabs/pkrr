@@ -67,8 +67,11 @@ def init(
 
     for lang in langs:
         provider = get_plugin(lang)
-        provider.scaffold(os.getcwd(), m.model_dump())
-        typer.secho(f"Scaffolded {lang} package", fg=typer.colors.GREEN)
+        subdir = f"{lang}_{name}"
+        subdir_path = os.path.join(os.getcwd(), subdir)
+        os.makedirs(subdir_path, exist_ok=True)
+        provider.scaffold(subdir_path, m.model_dump())
+        typer.secho(f"Scaffolded {lang} package at {subdir}/", fg=typer.colors.GREEN)
 
 
 @app.command()
@@ -104,10 +107,19 @@ def new(
 def _run_for_langs(cmd: str, lang: Optional[str]):
     m = load_manifest(".")
     langs = [lang] if lang else m.languages
+    cwd = os.getcwd()
     for l in langs:
+        subdir = os.path.join(cwd, f"{l}_{m.name}")
+        if not os.path.exists(subdir):
+            subdir = os.path.join(cwd, m.name)
+            if not os.path.exists(subdir):
+                typer.secho(
+                    f"Directory not found: {subdir}/", err=True, fg=typer.colors.RED
+                )
+                raise typer.Exit(code=10)
         provider = get_plugin(l)
         try:
-            getattr(provider, cmd)(os.getcwd(), m.model_dump())
+            getattr(provider, cmd)(subdir, m.model_dump())
         except FileNotFoundError as e:
             typer.secho(str(e), err=True, fg=typer.colors.RED)
             raise typer.Exit(code=10)

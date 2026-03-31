@@ -58,7 +58,7 @@ pkrr new r my-r-package
 
 | Command | Description |
 |---------|-------------|
-| `pkrr init` | Create `pkg.yaml` and scaffold project files in current directory |
+| `pkrr init` | Create `pkg.yaml` and scaffold packages in `python_<name>/` and `r_<name>/` directories |
 | `pkrr new <lang> <name>` | Scaffold a new package in a new directory |
 | `pkrr build` | Build artifacts for the package(s) |
 | `pkrr test` | Run tests for the package(s) |
@@ -92,7 +92,9 @@ pkrr init
 pkrr init --name my-project --version 1.0.0 --license MIT --languages python,r
 ```
 
-This creates a `pkg.yaml` manifest and scaffolds project files for all specified languages in the current directory.
+This creates a `pkg.yaml` manifest and scaffolds language-specific directories:
+- `python_<name>/` - Python package with `pyproject.toml`, `src/`, `tests/`, `docs/`
+- `r_<name>/` - R package with `DESCRIPTION`, `R/`, `tests/`, `NAMESPACE`
 
 ### Build, test, lint, docs
 
